@@ -1,0 +1,90 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Lato, Helvetica, sans-serif;
+  background: linear-gradient(to right, #36d1dc, #5b86e5);
+  padding: clamp(20px, 5vw, 50px) 10px 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 850px;
+  height: 20%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 30px 50px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
+  font-family: Raleway, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+h1 span {
+  font-weight: 700;
+}
+
+form div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  gap: 0 20px;
+}
+
+form div div {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+}
+
+.input1 {
+  min-width: 350px;
+  padding: 15px;
+  margin-top: 20px;
+  border: none;
+  border-bottom: 1px solid black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  font-size: 18px;
+}
+
+#calcul {
+  min-width: 200px;
+  padding: 10px;
+  border: none;
+  background-color: #FABE33;
+  box-shadow: 0 2px 5px;
+  border-radius: 5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.info {
+  margin: 30px 0;
+}
+
+.bmi-value {
+  font-size: 45px;
+  font-weight: bolder;
+  margin-bottom: 5px;
+}
+
+.result {
+  font-size: 20px;
+  font-family: Raleway, sans-serif;
+}
