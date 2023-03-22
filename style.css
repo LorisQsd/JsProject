@@ -67,7 +67,7 @@ label {
   font-size: 18px;
 }
 
-#calcul {
+#submit {
   min-width: 200px;
   padding: 10px;
   border: none;
@@ -88,7 +88,7 @@ label {
   font-weight: 500;
 }
 
-.bmi-value {
+.info > p {
   font-size: 45px;
   font-weight: bolder;
   margin-bottom: 5px;

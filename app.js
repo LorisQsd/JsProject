@@ -2,49 +2,48 @@ const BMIData = [
   { name: "Maigreur", color: "blue", range: [0, 18.5] },
   { name: "Bonne santé", color: "green", range: [18.5, 25] },
   { name: "Surpoids", color: "lightcoral", range: [25, 30] },
-  { name: "Obésité modérée", color: "orange", range: [30, 35] },
-  { name: "Obésité sévère", color: "crimson", range: [35, 40] },
-  { name: "Obésité morbide", color: "purple", range: 40 },
+  { name: "Obésité modérée !", color: "orange", range: [30, 35] },
+  { name: "Obésité sévère !!", color: "crimson", range: [35, 40] },
+  { name: "Obésité morbide !!!", color: "purple", range: 40 },
 ];
 
-const buttonBMI = document.querySelector("#calcul");
+const buttonBMI = document.querySelector("#submit");
 
-// Add of an eventListener on click and exec the function calculateBMI
-buttonBMI.addEventListener("click", calculateBMI);
+// Add eventListener on click and exec the function handleForm
+buttonBMI.addEventListener("click", handleForm);
+
+function handleForm(e) {
+  // preventDefault on submit button
+  e.preventDefault();
+
+  calculateBMI();
+}
 
 function calculateBMI() {
-  const weight = document.getElementById("weight").value;
-  const height = document.getElementById("height").value;
-  const bmi = weight / (height * height) * 10000;
-  const waiting = "En attente d'un résultat";
+  const weight = document.querySelector("#weight").value;
+  const height = document.querySelector("#height").value;
+  const bmi = (weight / Math.pow(height / 100, 2)).toFixed(2);
+  const result = document.querySelector("#result");
+  const advice = document.querySelector("#advice");
 
-  if (weight && height) {
-    document.getElementById("result").innerHTML = bmi.toFixed(2);
+  if (!weight || !height || weight <= 0 || height <= 0) {
+    result.textContent = `Wops`;
+    advice.textContent = `Renseignez correctement votre taille et votre poids.`;
+    advice.style.color = "red";
 
-    if (bmi <= BMIData[0].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[0].name}</strong>`;
-      document.querySelector("#advice").style.color = BMIData[0].color;
-    } else if (bmi <= BMIData[1].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[1].name}</strong>`;
-      document.querySelector("#advice").style.color = BMIData[1].color;
-    } else if (bmi <= BMIData[2].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[2].name}</strong>`;
-      document.querySelector("#advice").style.color = BMIData[2].color;
-    } else if (bmi <= BMIData[3].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[3].name}</strong>`;
-      document.querySelector("#advice").style.color = BMIData[3].color;
-    } else if (bmi <= BMIData[4].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[4].name}</strong>`;
-      document.querySelector("#advice").style.color = BMIData[4].color;
-    } else if (bmi > BMIData[5].range) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[5].name}</strong>`;
-      document.querySelector("#advice").style.color = BMIData[5].color;
-    } else {
-      document.querySelector("#advice").innerHTML = waiting;
-    }
-  } else if (!weight || !height) {
-    document.getElementById("result").innerHTML = `Wops`;
-    document.querySelector("#advice").innerHTML = `Renseignez votre taille et votre poids.`;
-    document.querySelector("#advice").style.color = "red";
+    return;
   }
-}
+
+  showResult(bmi);
+};
+
+function showResult(bmi) {
+  const rank = BMIData.find(data => {
+    if (bmi >= data.range[0] && bmi < data.range[1]) return data;
+    else if (typeof data.range === "number" && bmi >= data.range) return data;
+  });
+
+  result.textContent = bmi;
+  advice.textContent = `Vous êtes en : ${rank.name}`
+  advice.style.color = `${rank.color}`;
+};
