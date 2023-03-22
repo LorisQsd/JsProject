@@ -8,44 +8,43 @@ const BMIData = [
 ];
 
 const buttonBMI = document.querySelector("#calcul");
-const waiting = "En attente d'un résultat"
+
+// Add of an eventListener on click and exec the function calculateBMI
 buttonBMI.addEventListener("click", calculateBMI);
 
-// IMC = poids en kg / taille² en m
 function calculateBMI() {
-  // Récupérer les valeurs saisies dans les champs de formulaire
   const weight = document.getElementById("weight").value;
   const height = document.getElementById("height").value;
   const bmi = weight / (height * height) * 10000;
+  const waiting = "En attente d'un résultat";
 
-  // Vérifier que les valeurs sont des nombres
   if (weight && height) {
     document.getElementById("result").innerHTML = bmi.toFixed(2);
 
     if (bmi <= BMIData[0].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : ${BMIData[0].name}`;
+      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[0].name}</strong>`;
       document.querySelector("#advice").style.color = BMIData[0].color;
     } else if (bmi <= BMIData[1].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : ${BMIData[1].name}`;
+      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[1].name}</strong>`;
       document.querySelector("#advice").style.color = BMIData[1].color;
     } else if (bmi <= BMIData[2].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : ${BMIData[2].name}`;
+      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[2].name}</strong>`;
       document.querySelector("#advice").style.color = BMIData[2].color;
     } else if (bmi <= BMIData[3].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : ${BMIData[3].name}`;
+      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[3].name}</strong>`;
       document.querySelector("#advice").style.color = BMIData[3].color;
     } else if (bmi <= BMIData[4].range[1]) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : ${BMIData[4].name}`;
+      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[4].name}</strong>`;
       document.querySelector("#advice").style.color = BMIData[4].color;
     } else if (bmi > BMIData[5].range) {
-      document.querySelector("#advice").innerHTML = `Vous êtes en : ${BMIData[5].name}`;
+      document.querySelector("#advice").innerHTML = `Vous êtes en : <strong>${BMIData[5].name}</strong>`;
       document.querySelector("#advice").style.color = BMIData[5].color;
     } else {
       document.querySelector("#advice").innerHTML = waiting;
     }
   } else if (!weight || !height) {
     document.getElementById("result").innerHTML = `Wops`;
-    document.querySelector("#advice").innerHTML = `Remplissez correctement les inputs`;
+    document.querySelector("#advice").innerHTML = `Renseignez votre taille et votre poids.`;
+    document.querySelector("#advice").style.color = "red";
   }
-
 }
